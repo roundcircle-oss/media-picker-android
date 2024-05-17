@@ -29,6 +29,7 @@ import com.mediapicker.gallery.presentation.viewmodels.HomeViewModel
 import com.mediapicker.gallery.presentation.viewmodels.VideoFile
 import com.mediapicker.gallery.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.oss_custom_toolbar.*
+import kotlinx.android.synthetic.main.oss_custom_toolbar.view.toolbarBackButton
 import kotlinx.android.synthetic.main.oss_fragment_carousal.*
 import permissions.dispatcher.ktx.PermissionsRequester
 import permissions.dispatcher.ktx.constructPermissionsRequest
@@ -120,6 +121,11 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
 
         toolbarTitle.isAllCaps = Gallery.galleryConfig.textAllCaps
         action_button.isAllCaps = Gallery.galleryConfig.textAllCaps
+
+        toolbarTitle.gravity = Gallery.galleryConfig.galleryLabels.titleAlignment
+
+        toolbarBackButton.toolbarBackButton.setImageResource(Gallery.galleryConfig.galleryUiConfig.backIcon)
+
         action_button.text = if (Gallery.galleryConfig.galleryLabels.homeAction.isNotBlank())
             Gallery.galleryConfig.galleryLabels.homeAction
         else
