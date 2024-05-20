@@ -31,7 +31,6 @@ import com.mediapicker.gallery.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.oss_custom_toolbar.*
 import kotlinx.android.synthetic.main.oss_custom_toolbar.view.toolbarBackButton
 import kotlinx.android.synthetic.main.oss_fragment_carousal.*
-import permissions.dispatcher.PermissionRequest
 import permissions.dispatcher.ktx.PermissionsRequester
 import permissions.dispatcher.ktx.constructPermissionsRequest
 import java.io.Serializable
@@ -329,7 +328,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
     }
 
     override fun onGalleryItemClick(mediaIndex: Int) {
-        Gallery.carousalActionListener?.onGalleryImagePreview()
+        Gallery.carousalActionListener?.onGalleryImagePreview(mediaIndex, bridgeViewModel.getSelectedPhotos().size)
         MediaGalleryActivity.startActivityForResult(
             this, convertPhotoFileToMediaGallery(
                 bridgeViewModel.getSelectedPhotos()
@@ -340,12 +339,12 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PHOTO_PREVIEW && view != null) {
-            Gallery.carousalActionListener?.onGalleryImagePreviewClosed()
             var index = 0
             if (data != null) {
                 val bundle = data.extras
                 index = bundle!!.getInt("gallery_media_index", 0)
             }
+            Gallery.carousalActionListener?.onGalleryImagePreviewClosed(index, bridgeViewModel.getSelectedPhotos().size)
             mediaGalleryView.setSelectedPhoto(index)
         }
     }
