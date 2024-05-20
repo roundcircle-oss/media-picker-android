@@ -2,6 +2,7 @@ package com.mediapicker.gallery.domain.contract
 
 import com.mediapicker.gallery.domain.entity.PhotoFile
 import com.mediapicker.gallery.presentation.viewmodels.VideoFile
+import permissions.dispatcher.PermissionRequest
 import java.io.File
 
 
@@ -24,6 +25,8 @@ interface IGalleryCommunicator{
     fun onPermissionDenied()
 
     fun onNeverAskPermissionAgain()
+
+    fun onShowRationale(permissionRequest: PermissionRequest)
 }
 
 internal interface GalleryPagerCommunicator {
@@ -69,5 +72,9 @@ internal class GalleryCommunicatorDefaultImpl : IGalleryCommunicator{
 
     override fun onNeverAskPermissionAgain() {
       //Need Implementation
+    }
+
+    override fun onShowRationale(permissionRequest: PermissionRequest) {
+        // Need Implementation
     }
 }

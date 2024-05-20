@@ -31,6 +31,7 @@ import com.mediapicker.gallery.utils.SnackbarUtils
 import kotlinx.android.synthetic.main.oss_custom_toolbar.*
 import kotlinx.android.synthetic.main.oss_custom_toolbar.view.toolbarBackButton
 import kotlinx.android.synthetic.main.oss_fragment_carousal.*
+import permissions.dispatcher.PermissionRequest
 import permissions.dispatcher.ktx.PermissionsRequester
 import permissions.dispatcher.ktx.constructPermissionsRequest
 import java.io.Serializable
@@ -71,7 +72,8 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
                 ),
                 onPermissionDenied = ::onPermissionDenied,
                 onNeverAskAgain = ::showNeverAskAgainPermission,
-                requiresPermission = ::checkPermissions
+                requiresPermission = ::checkPermissions,
+                onShowRationale = ::onShowRationale
             )
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             constructPermissionsRequest(
@@ -81,7 +83,8 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
                 ),
                 onPermissionDenied = ::onPermissionDenied,
                 onNeverAskAgain = ::showNeverAskAgainPermission,
-                requiresPermission = ::checkPermissions
+                requiresPermission = ::checkPermissions,
+                onShowRationale = ::onShowRationale
             )
         } else {
             constructPermissionsRequest(
@@ -92,11 +95,15 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
                 ),
                 onPermissionDenied = ::onPermissionDenied,
                 onNeverAskAgain = ::showNeverAskAgainPermission,
-                requiresPermission = ::checkPermissions
+                requiresPermission = ::checkPermissions,
+                onShowRationale = ::onShowRationale
             )
         }
     }
 
+    private fun onShowRationale(permissionRequest: PermissionRequest) {
+        Gallery.galleryConfig.galleryCommunicator?.onShowRationale(permissionRequest)
+    }
 
     override fun getLayoutId() = R.layout.oss_fragment_carousal
 
