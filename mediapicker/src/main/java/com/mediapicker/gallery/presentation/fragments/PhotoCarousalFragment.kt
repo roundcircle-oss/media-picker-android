@@ -72,8 +72,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
                 ),
                 onPermissionDenied = ::onPermissionDenied,
                 onNeverAskAgain = ::showNeverAskAgainPermission,
-                requiresPermission = ::checkPermissions,
-                onShowRationale = ::onShowRationale
+                requiresPermission = ::checkPermissions
             )
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             constructPermissionsRequest(
@@ -83,8 +82,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
                 ),
                 onPermissionDenied = ::onPermissionDenied,
                 onNeverAskAgain = ::showNeverAskAgainPermission,
-                requiresPermission = ::checkPermissions,
-                onShowRationale = ::onShowRationale
+                requiresPermission = ::checkPermissions
             )
         } else {
             constructPermissionsRequest(
@@ -95,14 +93,9 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
                 ),
                 onPermissionDenied = ::onPermissionDenied,
                 onNeverAskAgain = ::showNeverAskAgainPermission,
-                requiresPermission = ::checkPermissions,
-                onShowRationale = ::onShowRationale
+                requiresPermission = ::checkPermissions
             )
         }
-    }
-
-    private fun onShowRationale(permissionRequest: PermissionRequest) {
-        Gallery.galleryConfig.galleryCommunicator?.onShowRationale(permissionRequest)
     }
 
     override fun getLayoutId() = R.layout.oss_fragment_carousal
@@ -211,6 +204,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
     }
 
     private fun changeActionButtonState(state: Boolean) {
+        Gallery.galleryConfig.galleryCommunicator?.onStepValidate(state)
         action_button.isSelected = state
     }
 
