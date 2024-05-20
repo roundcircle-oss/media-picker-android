@@ -127,6 +127,9 @@ class MainActivity : AppCompatActivity() {
         override fun onNeverAskPermissionAgain() {
             Toast.makeText(applicationContext,"Permission denied :(",Toast.LENGTH_LONG).show()
         }
+
+        override fun onStepValidate(isValid: Boolean) {
+        }
     }
 
 
