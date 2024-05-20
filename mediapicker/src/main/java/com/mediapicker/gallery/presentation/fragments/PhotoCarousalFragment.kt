@@ -340,6 +340,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PHOTO_PREVIEW && view != null) {
+            Gallery.carousalActionListener?.onGalleryImagePreviewClosed()
             var index = 0
             if (data != null) {
                 val bundle = data.extras

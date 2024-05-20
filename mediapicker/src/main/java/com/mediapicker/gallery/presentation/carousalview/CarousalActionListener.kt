@@ -7,4 +7,5 @@ interface CarousalActionListener {
     fun onGalleryFolderSelected()
     fun onGalleryImagePreview()
     fun onGalleryImagePreviewChanged()
+    fun onGalleryImagePreviewClosed()
 }
