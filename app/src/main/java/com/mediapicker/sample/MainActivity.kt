@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onShowPermissionRationale(permissionRequest: PermissionRequestWrapper) {
-
+            Toast.makeText(applicationContext,"Permission show rationale :|",Toast.LENGTH_LONG).show()
         }
 
         override fun onStepValidate(isValid: Boolean) {
