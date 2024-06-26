@@ -222,6 +222,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
 
     private fun setUpWithOutTabLayout() {
         tabLayout.visibility = View.GONE
+        mediaGalleryView.setImagesForPager(convertPhotoFileToMediaGallery(getPhotosFromArguments()))
         PagerAdapter(
             childFragmentManager,
             listOf(
