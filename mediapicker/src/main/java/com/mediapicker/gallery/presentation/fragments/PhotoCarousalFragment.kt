@@ -143,26 +143,28 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
     }
 
     fun checkPermissions() {
-        when (homeViewModel.getMediaType()) {
-            GalleryConfig.MediaType.PhotoOnly -> {
-                setUpWithOutTabLayout()
-            }
+        if (!isRemoving) {
+            when (homeViewModel.getMediaType()) {
+                GalleryConfig.MediaType.PhotoOnly -> {
+                    setUpWithOutTabLayout()
+                }
 
-            GalleryConfig.MediaType.PhotoWithFolderOnly -> {
-                setUpWithOutTabLayout()
-            }
+                GalleryConfig.MediaType.PhotoWithFolderOnly -> {
+                    setUpWithOutTabLayout()
+                }
 
-            GalleryConfig.MediaType.PhotoWithoutCameraFolderOnly -> {
-                setUpWithOutTabLayout()
-            }
+                GalleryConfig.MediaType.PhotoWithoutCameraFolderOnly -> {
+                    setUpWithOutTabLayout()
+                }
 
-            else -> {
-                setUpWithOutTabLayout()
+                else -> {
+                    setUpWithOutTabLayout()
+                }
             }
+            openPage()
+            action_button.isSelected = false
+            action_button.setOnClickListener { onActionButtonClicked() }
         }
-        openPage()
-        action_button.isSelected = false
-        action_button.setOnClickListener { onActionButtonClicked() }
     }
 
     fun onPermissionDenied() {
