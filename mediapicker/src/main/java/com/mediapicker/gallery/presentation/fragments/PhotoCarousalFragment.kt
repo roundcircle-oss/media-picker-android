@@ -143,7 +143,7 @@ open class PhotoCarousalFragment : BaseFragment(), GalleryPagerCommunicator,
     }
 
     fun checkPermissions() {
-        if (!isRemoving) {
+        if (!isRemoving && isAdded) {
             when (homeViewModel.getMediaType()) {
                 GalleryConfig.MediaType.PhotoOnly -> {
                     setUpWithOutTabLayout()
