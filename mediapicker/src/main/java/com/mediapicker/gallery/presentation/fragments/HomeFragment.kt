@@ -49,7 +49,19 @@ open class HomeFragment : BaseFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        permissionsRequester = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        permissionsRequester = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            constructPermissionsRequest(
+                permissions = arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.READ_MEDIA_VIDEO,
+                    Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+                ),
+                onPermissionDenied = ::onPermissionDenied,
+                onNeverAskAgain = ::showNeverAskAgainPermission,
+                requiresPermission = ::checkPermissions
+            )
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             constructPermissionsRequest(
                 permissions = arrayOf(
                     Manifest.permission.CAMERA,
